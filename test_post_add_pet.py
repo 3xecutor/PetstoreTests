@@ -37,4 +37,4 @@ def test_create_pet(create_pet, pet_data, expected_schema):
     response_data = json.loads(response.text)
     validation_errors = jsonschema.validate(response_data, expected_schema)
     assert response.status_code == 200
-    assert not validation_errors, f"Validation errors: {validation_errors}"
+    assert not validation_errors, f"Ошибки валидации: {validation_errors}"
