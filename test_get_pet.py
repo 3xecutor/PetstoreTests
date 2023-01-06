@@ -1,6 +1,7 @@
 import pytest
 import requests
 
+import data
 
 @pytest.fixture
 def pet_id():
@@ -23,10 +24,7 @@ def expected_pet_data(pet_id):
 
 
 @pytest.mark.parametrize("pet_id,expected_pet_data", [(450198289,
-                                                       {'id': 450198289, 'category': {'id': 1, 'name': 'Tests'},
-                                                        'name': 'Gold', 'photoUrls': ['https://example.com/fluffy.jpg'],
-                                                        'tags': [{'id': 450198289, 'name': 'Cute'}],
-                                                        'status': 'available'})])
+                                                       hh.get_pet)])
 def test_get_pet_by_id(pet_id, pet_url, pet_headers, expected_pet_data):
     response = requests.get(pet_url, headers=pet_headers)
     assert response.status_code == 200

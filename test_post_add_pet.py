@@ -4,6 +4,8 @@ import jsonschema
 import pytest
 import requests
 
+import data
+
 
 @pytest.fixture
 def create_pet():
@@ -22,57 +24,12 @@ def create_pet():
 
 @pytest.fixture
 def pet_data():
-    return {
-        "id": 450198289,
-        "category": {
-            "id": 1,
-            "name": "Tests"
-        },
-        "name": "Gold",
-        "photoUrls": [
-            "https://vk.com/cute.jpg"
-        ],
-        "tags": [
-            {
-                "id": 450198289,
-                "name": "Cute"
-            }
-        ],
-        "status": "available"
-    }
+    return data.p_data
 
 
 @pytest.fixture
 def expected_schema():
-    return {
-        "type": "object",
-        "properties": {
-            "id": {"type": "integer", "format": "int64"},
-            "category": {
-                "type": "object",
-                "properties": {
-                    "id": {"type": "integer", "format": "int64"},
-                    "name": {"type": "string"}
-                }
-            },
-            "name": {"type": "string"},
-            "photoUrls": {
-                "type": "array",
-                "items": {"type": "string"}
-            },
-            "tags": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "id": {"type": "integer", "format": "int64"},
-                        "name": {"type": "string"}
-                    }
-                }
-            },
-            "status": {"type": "string", "enum": ["available", "pending", "sold"]}
-        }
-    }
+    return data.e_schema
 
 
 def test_create_pet(create_pet, pet_data, expected_schema):
